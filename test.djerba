@@ -1,0 +1,25 @@
+;; Djerba demo
+
+$name <- "Khaled"
+:> "Hello,", $name
+
+$a <- 10
+$b <- 3
+:> "a+b =", $a + $b, "| a*b =", $a * $b, "| a^2 =", $a ^ 2
+
+? $a >= 10 {
+  :> "A is at least ten"
+} else {
+  :> "A is small"
+}
+
+@repeat(msg, times) {
+  $i <- 0
+  ~ $i < times {
+    :> msg, $i
+    $i <- $i + 1
+  }
+  !> "done"
+}
+
+:> repeat("tick", 3)

@@ -1,25 +1,199 @@
-;; Djerba demo
+;; =========================================
+;; 🌴 Djerba Enhanced Features Demo
+;; =========================================
 
-$name <- "Khaled"
-:> "Hello,", $name
+:> "=== Welcome to Enhanced Djerba ==="
+:> ""
 
-$a <- 10
-$b <- 3
-:> "a+b =", $a + $b, "| a*b =", $a * $b, "| a^2 =", $a ^ 2
+;; =========================================
+;; 1. Basic Variables & Math
+;; =========================================
+:> "--- 1. Variables & Math ---"
+$x <- 10
+$y <- 3
+:> "x =", $x, "| y =", $y
+:> "x + y =", $x + $y
+:> "x ^ 2 =", $x ^ 2
+:> "sqrt(16) =", sqrt(16)
+:> ""
 
-? $a >= 10 {
-  :> "A is at least ten"
-} else {
-  :> "A is small"
+;; =========================================
+;; 2. Boolean & Logical Operators
+;; =========================================
+:> "--- 2. Booleans & Logic ---"
+$isTrue <- true
+$isFalse <- false
+:> "true and false =", $isTrue and $isFalse
+:> "true or false =", $isTrue or $isFalse
+:> "not false =", not $isFalse
+:> "10 > 5 and 3 < 7 =", 10 > 5 and 3 < 7
+:> ""
+
+;; =========================================
+;; 3. Lists
+;; =========================================
+:> "--- 3. Lists ---"
+$numbers <- [1, 2, 3, 4, 5]
+$fruits <- ["apple", "banana", "cherry"]
+:> "Numbers:", $numbers
+:> "Fruits:", $fruits
+:> "First number:", $numbers[0]
+:> "Second fruit:", $fruits[1]
+:> "List length:", len($numbers)
+:> ""
+
+;; =========================================
+;; 4. For Loops
+;; =========================================
+:> "--- 4. For Loops ---"
+:> "Counting with for loop:"
+@> $num in [1, 2, 3, 4, 5] {
+  :> "  Number:", $num
 }
 
-@repeat(msg, times) {
-  $i <- 0
-  ~ $i < times {
-    :> msg, $i
-    $i <- $i + 1
+:> "Iterating over fruits:"
+@> $fruit in $fruits {
+  :> "  I like", $fruit
+}
+:> ""
+
+;; =========================================
+;; 5. Range Function
+;; =========================================
+:> "--- 5. Range Function ---"
+:> "Range from 0 to 5:"
+@> $i in range(5) {
+  :> "  i =", $i
+}
+:> ""
+
+;; =========================================
+;; 6. Break & Continue
+;; =========================================
+:> "--- 6. Break & Continue ---"
+:> "Loop with break at 3:"
+@> $n in range(10) {
+  ? $n == 3 {
+    :> "  Breaking at", $n
+    break
   }
-  !> "done"
+  :> "  n =", $n
 }
 
-:> repeat("tick", 3)
+:> "Loop with continue (skip even numbers):"
+@> $n in range(8) {
+  ? $n % 2 == 0 {
+    continue
+  }
+  :> "  Odd number:", $n
+}
+:> ""
+
+;; =========================================
+;; 7. String Functions
+;; =========================================
+:> "--- 7. String Functions ---"
+$greeting <- "hello world"
+:> "Original:", $greeting
+:> "Uppercase:", upper($greeting)
+:> "Length:", len($greeting)
+:> "Substring (0-5):", substr($greeting, 0, 5)
+:> ""
+
+;; =========================================
+;; 8. Math Functions
+;; =========================================
+:> "--- 8. Math Functions ---"
+:> "sin(PI/2) =", sin(PI / 2)
+:> "cos(0) =", cos(0)
+:> "abs(-42) =", abs(-42)
+:> "floor(3.7) =", floor(3.7)
+:> "ceil(3.2) =", ceil(3.2)
+:> "min(5,2,8,1) =", min(5, 2, 8, 1)
+:> "max(5,2,8,1) =", max(5, 2, 8, 1)
+:> ""
+
+;; =========================================
+;; 9. Type Checking
+;; =========================================
+:> "--- 9. Type Checking ---"
+:> "type(42) =", type(42)
+:> "type('hello') =", type("hello")
+:> "type(true) =", type(true)
+:> "type([1,2,3]) =", type([1, 2, 3])
+:> ""
+
+;; =========================================
+;; 10. Nested Lists & Advanced Patterns
+;; =========================================
+:> "--- 10. Nested Lists ---"
+$matrix <- [[1, 2], [3, 4], [5, 6]]
+:> "Matrix:", $matrix
+:> "First row:", $matrix[0]
+:> "Element [1][0]:", $matrix[1][0]
+:> ""
+
+;; =========================================
+;; 11. Functions with New Features
+;; =========================================
+:> "--- 11. Functions ---"
+
+@fibonacci(n) {
+  ? n <= 1 {
+    !> n
+  }
+  !> fibonacci(n - 1) + fibonacci(n - 2)
+}
+
+:> "Fibonacci sequence:"
+@> $i in range(8) {
+  :> "  fib(", $i, ") =", fibonacci($i)
+}
+:> ""
+
+@sumList(lst) {
+  $total <- 0
+  @> $item in lst {
+    $total <- $total + $item
+  }
+  !> $total
+}
+
+$myList <- [10, 20, 30, 40]
+:> "Sum of", $myList, "=", sumList($myList)
+:> ""
+
+;; =========================================
+;; 12. List Manipulation
+;; =========================================
+:> "--- 12. List Operations ---"
+$stack <- [1, 2, 3]
+:> "Stack:", $stack
+append($stack, 4)
+:> "After append(4):", $stack
+:> "Pop:", pop($stack)
+:> "After pop:", $stack
+:> ""
+
+;; =========================================
+;; 13. Complex Example: FizzBuzz
+;; =========================================
+:> "--- 13. FizzBuzz (1-15) ---"
+@> $num in range(1, 16) {
+  ? $num % 15 == 0 {
+    :> "FizzBuzz"
+  } else {
+    ? $num % 3 == 0 {
+      :> "Fizz"
+    } else {
+      ? $num % 5 == 0 {
+        :> "Buzz"
+      } else {
+        :> $num
+      }
+    }
+  }
+}
+:> ""
+
+:> "=== Demo Complete! ==="
